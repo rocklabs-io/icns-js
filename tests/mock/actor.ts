@@ -1,7 +1,7 @@
 import { Agent } from "@dfinity/agent";
 import { Principal } from "@dfinity/principal";
-import { ICNSRegistrar, ICNSResolver } from "declarations";
-import { ActorAdapter, RegistrarActor, ResolverActor } from "integrations";
+import { ICNSETHVerify, ICNSRegistrar, ICNSResolver } from "declarations";
+import { ActorAdapter, ETHVerifyActor, RegistrarActor, ResolverActor } from "integrations";
 import { mocAuctionExt, mocBidExt } from "./auctionExt";
 import { mockDefualtInfo, mockRegistrarInfo, mockResolverInfo } from "./info";
 import { mockPrincipal } from "./principal";
@@ -72,6 +72,10 @@ export const mockResolverActor = (params: Partial<ICNSResolver> = {}): ResolverA
   ...params,
 } as ResolverActor)
 
+export const mockETHVerifyActor = (params: Partial<ICNSETHVerify> = {}): ETHVerifyActor => ({
+  'getAddr': async (arg_0: string) => ({'V001': {'eth': '0xe6'}}),
+  ...params
+} as ETHVerifyActor)
 
 
 export const mockAgent = (params: Partial<Agent> = {}): Agent =>

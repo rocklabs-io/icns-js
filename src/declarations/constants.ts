@@ -20,6 +20,8 @@ export const ICNSConstants = {
     'etiyd-ciaaa-aaaan-qabbq-cai',
     favorite: process.env.FAVORITE_CANISTER_ID || 
     'pe5bb-piaaa-aaaan-qaa7q-cai',
+    ethVerfy:
+    '5opmo-eiaaa-aaaan-qda5q-cai'
   },
   wicpDecimal: 8
 };

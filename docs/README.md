@@ -1,4 +1,4 @@
-# icns-js
+# @psychedelic/icns-js
 
 ## Table of contents
 

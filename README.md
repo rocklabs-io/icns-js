@@ -1,7 +1,7 @@
 # ICNS-js: An SDK for Interacting with ICNS Canisters
 ![image](https://user-images.githubusercontent.com/73345016/161631070-a2049e53-32b7-4068-b3ad-135ab2f51501.png)
 
-> 💬 All feedback is welcomed! [Set up an issue](https://github.com/Psychedelic/icns-js/issues).
+> 💬 All feedback is welcomed! [Set up an issue](https://github.com/rocklabs-io/icns-js/issues).
 
 ICNS is an open internet service built on the Internet Computer blockchain. The core protocol maps human-readable names to machine-readable crypto addresses and other customized user metadata, helping to remove the burden of memorizing crypto addresses. **Your ICNS name will be your passport to the Web3 ecosystem.**
 
@@ -40,28 +40,28 @@ ICNS-js can be installed locally from our Github repository. To do so you're goi
 Next, authenticate yourself via `npm login` command using your Github email for the **username** and the **personal access token** as your **password:**
 
 ```bash
-npm login --registry=https://npm.pkg.github.com --scope=@psychedelic
+npm login --registry=https://npm.pkg.github.com --scope=@rocklabs-io
 ```
 
-The last thing we’ve got to do before installing is set your npm configuration so that when you run `npm install @psychedelic/`, npm will pull from Github instead of its own registry.
+The last thing we’ve got to do before installing is set your npm configuration so that when you run `npm install @rocklabs-io/`, npm will pull from Github instead of its own registry.
 
 To do this, **we have two options:**
 
 1) Run the following command
 ```bash
-npm config set @psychedelic:registry https://npm.pkg.github.com
+npm config set @rocklabs-io:registry https://npm.pkg.github.com
 ```
 
-2) Add a `.npmrc` file to your project's root directory and add the following line to the file:
+1) Add a `.npmrc` file to your project's root directory and add the following line to the file:
 
 ```bash
-@psychedelic:registry=https://npm.pkg.github.com
+@rocklabs-io:registry=https://npm.pkg.github.com
 ```
 
 You're all set! Install icns-js into your project with the following command:
 
 ```bash
-yarn add @psychedelic/icns-js
+yarn add @rocklabs-io/icns-js
 ```
 
 <br>
@@ -69,4 +69,4 @@ yarn add @psychedelic/icns-js
 ---
 
 ## 🏆 Acknowledgements
-ICNS-js is modified from [Sonic-js](https://github.com/Psychedelic/sonic-js).
+ICNS-js is modified from [Sonic-js](https://github.com/rocklabs-io/sonic-js).

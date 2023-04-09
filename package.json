@@ -1,6 +1,6 @@
 {
-  "name": "@psychedelic/icns-js",
-  "version": "0.1.10",
+  "name": "@rocklabs-io/icns-js",
+  "version": "0.1.12",
   "description": "icns-js is a library for interacting with ICNS canisters",
   "main": "dist/index.js",
   "repository": "https://github.com/Psychedelic/icns-js.git",

@@ -1,5 +1,6 @@
 import { ICNSConstants } from '@/declarations';
 import {
+  idlETHVerifyFactory,
   idlFavoriteFactory,
   idlRegistrarFactory,
   idlRegistryFactory,
@@ -9,6 +10,7 @@ import {
  } from '@/declarations/did';
 
 import {
+  ICNSETHVerify,
   ICNSFavorite,
   ICNSRegistrar,
   ICNSRegistry,
@@ -148,4 +150,25 @@ export const createTokenActor = ({
   actorAdapter = new ActorAdapter(),
 }: CreateCanisterActorOptions): Promise<TokenActor> => {
   return actorAdapter.createActor(canisterId, idlWICPFactory);
+};
+
+
+ /**
+ * Type of WICPActor.
+ * @internal
+ */
+ export type ETHVerifyActor = ActorAdapter.Actor<ICNSETHVerify>;
+
+/**
+ * Creates a DIP20 Token canister actor.
+ * If no option is provided, the actor will be created using the default canister options.
+ * @param {CreateCanisterActorOptions} options Options for creating the TokenActor
+ * @returns {ETHVerifyActor} actor instance
+ * @internal
+ */
+export const createETHVerifyActor = ({
+  canisterId = ICNSConstants.canisterIds.ethVerfy,
+  actorAdapter = new ActorAdapter()
+}: CreateCanisterActorOptions = {}): Promise<ETHVerifyActor> => {
+  return actorAdapter.createActor(canisterId, idlETHVerifyFactory);
 };

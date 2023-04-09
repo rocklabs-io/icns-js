@@ -24,7 +24,6 @@ describe('create resolver', () => {
 
   test('test domain get host', async () => {
     const host = controller.getHost('xxxx.icp');
-    console.log((await host).toString())
     expect(host).toBeDefined();
   })
 
