@@ -1,25 +1,30 @@
-# @psychedelic/icns-js
+# @rocklabs-io/icns-js
 
 ## Table of contents
 
+### Type aliases
+
+- [Address](README.md#address)
+- [BidState](README.md#bidstate)
+- [Operation](README.md#operation)
+- [Result](README.md#result)
+- [TxReceipt](README.md#txreceipt)
+
 ### Interfaces
 
+- [AddressV1](interfaces/AddressV1.md)
 - [AuctionExt](interfaces/AuctionExt.md)
 - [BidExt](interfaces/BidExt.md)
 - [DefaultInfoExt](interfaces/DefaultInfoExt.md)
+- [ICNSETHVerify](interfaces/ICNSETHVerify.md)
 - [Info](interfaces/Info.md)
 - [Metadata](interfaces/Metadata.md)
 - [RecordExt](interfaces/RecordExt.md)
 - [ToBigNumberOptions](interfaces/ToBigNumberOptions.md)
 
-### Type aliases
-
-- [BidState](README.md#bidstate)
-- [Operation](README.md#operation)
-- [TxReceipt](README.md#txreceipt)
-
 ### Classes
 
+- [ICNSETHVerifyController](classes/ICNSETHVerifyController.md)
 - [ICNSRegistrarController](classes/ICNSRegistrarController.md)
 - [ICNSRegistryController](classes/ICNSRegistryController.md)
 - [ICNSResolverController](classes/ICNSResolverController.md)
@@ -44,6 +49,18 @@
 
 ## Type aliases
 
+### Address
+
+Ƭ **Address**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `V001` | [`AddressV1`](interfaces/AddressV1.md) |
+
+___
+
 ### BidState
 
 Ƭ **BidState**: { `win`: ``null``  } \| { `lost`: ``null``  } \| { `processing`: ``null``  }
@@ -53,6 +70,12 @@ ___
 ### Operation
 
 Ƭ **Operation**: { `transferFrom`: ``null``  } \| { `burn`: ``null``  } \| { `mint`: ``null``  } \| { `approve`: ``null``  } \| { `transfer`: ``null``  }
+
+___
+
+### Result
+
+Ƭ **Result**: { `Ok`: ``null``  } \| { `Err`: `string`  }
 
 ___
 
@@ -208,3 +231,6 @@ ___
 #### Returns
 
 `boolean`
+
+
+
