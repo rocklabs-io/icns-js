@@ -1,9 +1,9 @@
 {
   "name": "@rocklabs-io/icns-js",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "icns-js is a library for interacting with ICNS canisters",
   "main": "dist/index.js",
-  "repository": "https://github.com/Psychedelic/icns-js.git",
+  "repository": "https://github.com/rocklabs-io/icns-js.git",
   "author": "ICNS Team",
   "license": "GLP-3.0",
   "devDependencies": {
