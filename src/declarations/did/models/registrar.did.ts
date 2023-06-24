@@ -15,7 +15,6 @@ export interface BidExt {
 export type BidState = { 'win' : null } |
   { 'lost' : null } |
   { 'processing' : null };
-/** @internal */
 export interface ICNSRegistrar {
   'addReserve' : (arg_0: string) => Promise<Result_1>,
   'addReserveBatch' : (arg_0: string) => Promise<Result_1>,
@@ -24,6 +23,11 @@ export interface ICNSRegistrar {
     >,
   'available' : (arg_0: string) => Promise<Result_1>,
   'claimName' : (arg_0: string) => Promise<TxReceipt>,
+  'exportAuctions' : () => Promise<Array<AuctionExt>>,
+  'exportBalances' : () => Promise<Array<[Principal, bigint]>>,
+  'exportBids' : () => Promise<Array<[Principal, Array<BidExt>]>>,
+  'exportExpiries' : () => Promise<Array<[string, bigint]>>,
+  'forceClaim' : () => Promise<bigint>,
   'getAllAuctions' : () => Promise<Array<AuctionExt>>,
   'getAuction' : (arg_0: string) => Promise<[] | [AuctionExt]>,
   'getAuctionByEndTime' : () => Promise<Array<AuctionExt>>,
@@ -33,6 +37,7 @@ export interface ICNSRegistrar {
   'getMinBidPrice' : (arg_0: string) => Promise<Result_3>,
   'getMinRaisePrice' : (arg_0: string) => Promise<Result_3>,
   'getRandomAuctions' : (arg_0: bigint) => Promise<Array<AuctionExt>>,
+  'getRecentlyRegisterName' : () => Promise<Array<RegisterInfo>>,
   'getRenewPrice' : (arg_0: string) => Promise<Result_3>,
   'getReservedNames' : () => Promise<Array<string>>,
   'getTotalBalance' : () => Promise<[bigint, bigint]>,
@@ -40,6 +45,8 @@ export interface ICNSRegistrar {
   'getUserLostBids' : (arg_0: Principal) => Promise<Array<BidExt>>,
   'getUserToClaimBids' : (arg_0: Principal) => Promise<Array<BidExt>>,
   'getUserWinningBids' : (arg_0: Principal) => Promise<Array<BidExt>>,
+  'historySize' : () => Promise<bigint>,
+  'instantRegister' : (arg_0: string) => Promise<TxReceipt>,
   'nameExpiry' : (arg_0: string) => Promise<Result_2>,
   'placeBid' : (arg_0: string, arg_1: bigint) => Promise<TxReceipt>,
   'removeReserve' : (arg_0: string) => Promise<Result_1>,
@@ -75,6 +82,12 @@ export interface Info {
   'paused' : boolean,
   'thresholdWindow' : bigint,
 }
+export interface RegisterInfo {
+  'name' : string,
+  'timestamp' : Time,
+  'price' : bigint,
+  'registrant' : Principal,
+}
 type Result = { 'ok' : null } |
   { 'err' : string };
 type Result_1 = { 'ok' : boolean } |
@@ -86,3 +99,4 @@ type Result_3 = { 'ok' : bigint } |
 type Time = bigint;
 export type TxReceipt = { 'ok' : bigint } |
   { 'err' : string };
+interface _SERVICE extends ICNSRegistrar {}

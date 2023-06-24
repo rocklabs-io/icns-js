@@ -50,14 +50,16 @@ export class ICNSRegistrarController {
   /**
    * Verify domain available or not.
    * @param {string} domain Represents domain name.
-   * @returns {Promise<boolean | string>}
+   * @returns {Promise<boolean>}
    */
-  async domainIsAvailable(domain: string): Promise<boolean | string> {
+  async domainIsAvailable(domain: string): Promise<boolean> {
     if (!VerifyDomainName(domain))
       throw new Error('Incorrect domain name')
     const name = removeIcpSuffix(domain)
     const response = await this.registrarActor.available(name);
-    return 'ok' in response ? response['ok'] : response['err']
+    if('err' in response) throw new Error(JSON.stringify(response.err));
+
+    return response.ok;
   }
 
   /**
@@ -156,30 +158,74 @@ export class ICNSRegistrarController {
   }
 
   /**
-   * Place Bid into canister.
-   * This function uses the actor agent identity.
-   * @param {Types.Amount} amount the amount of this bid.
-   * @param {string} domian domain name, 'hello' for example.
-   * @returns {Promise<void>} Return void promise.
+   * Get expiry time by domain name.
+   * @param {string} domain Domain name, 'hello' for example.
+   * @returns {Promise<bigint>} Expiry time (nano seconds).
    */
-  async placeBid(
+  async nameExpiry (domain: string): Promise<bigint> {
+    if (!VerifyDomainName(domain))
+      throw new Error('Incorrect domain name')
+
+    const name = removeIcpSuffix(domain);
+    const expiryRes = await this.registrarActor.nameExpiry(name);
+
+    if('err' in expiryRes) throw new Error(JSON.stringify(expiryRes.err));
+
+    return expiryRes.ok;
+  }
+
+  /** Get minimum register price by domain.
+   * @param {string} domain Domain name, 'hello' for example.
+   * @returns {Promise<bigint>} Register price.
+   */
+  async getMinPrice (domain: string): Promise<bigint> {
+    if (!VerifyDomainName(domain))
+      throw new Error('Incorrect domain name')
+
+    const name = removeIcpSuffix(domain);
+    const priceRes = await this.registrarActor.getMinBidPrice(name);
+
+    if('err' in priceRes) throw new Error(JSON.stringify(priceRes.err));
+
+    return priceRes.ok;
+  }
+
+  /**
+   * Register a name (sufficient WICP allowance is required).
+   * @param {string} domain Domain name, 'hello' for example.
+   * @returns {bigint} TxReceipt.
+   */
+  async instantRegister (
+    domain: string
+  ): Promise<bigint> {
+    if (!VerifyDomainName(domain))
+      throw new Error('Incorrect domain name')
+    
+    const name = removeIcpSuffix(domain);
+    const registerTx = await this.registrarActor.instantRegister(name);
+    
+    if('err' in registerTx) throw new Error(JSON.stringify(registerTx.err));
+
+    return registerTx.ok;
+  }
+
+  /**
+   * Get minimum renew price by domain name.
+   * @param {string} domain domain name to be renewed, 'hello' for example.
+   * @returns {bigint} renew price.
+   */
+  async getRenewPrice(
     domain: string,
-    amount: Types.Amount
-  ): Promise<void> {
+  ): Promise<bigint> {
     if (!VerifyDomainName(domain))
       throw new Error('Incorrect domain name')
     const name = removeIcpSuffix(domain)
 
-    await this.approve(ICNSConstants.canisterIds.WICP, amount);
+    const priceRes = await this.registrarActor.getRenewPrice(name);
 
-    const parsedAmount = toBigNumber(amount).removeDecimals(ICNSConstants.wicpDecimal);
+    if('err' in priceRes) throw new Error(JSON.stringify(priceRes.err));
 
-    const result = await this.registrarActor.placeBid(
-      name,
-      parsedAmount.toBigInt()
-    );
-
-    if ('err' in result) throw new Error(JSON.stringify(result.err));
+    return priceRes.ok;
   }
 
   /**
@@ -196,18 +242,6 @@ export class ICNSRegistrarController {
     if (!VerifyDomainName(domain))
       throw new Error('Incorrect domain name')
     const name = removeIcpSuffix(domain)
-
-    await this.getRegistrarInfo()
-
-    let renewPrice = this.info?.renewPrices
-
-    if (name.length === 0 || !renewPrice)
-      throw new Error('Incorrect value')
-
-    let unitPrice = name.length >= renewPrice.length ? renewPrice[renewPrice.length - 1] : renewPrice[name.length - 1]
-    let amount = (Number(duration) * unitPrice).toString()
-
-    await this.approve(ICNSConstants.canisterIds.WICP, amount);
 
     const result = await this.registrarActor.renew(
       name,
