@@ -1,12 +1,13 @@
+import 'big-number';
 import { Actor } from "@dfinity/agent";
-import { createResolverActor, ICNSResolverController, ResolverActor } from "integrations";
-import { mockAgent, mockResolverActor } from "../../mock/actor";
+import { ICNSRegistrarController, RegistrarActor, createRegistrarActor } from "integrations";
+import { mockAgent, mockRegistrarActor } from "../../mock/actor";
 
 jest.mock('@/integrations/actor');
 jest.mock('@dfinity/agent');
 
-(createResolverActor as jest.Mock).mockImplementation(async () => 
-  mockResolverActor()
+(createRegistrarActor as jest.Mock).mockImplementation(async () => 
+mockRegistrarActor()
 );
 
 (Actor.agentOf as jest.Mock).mockImplementation(async () => 
@@ -14,17 +15,31 @@ jest.mock('@dfinity/agent');
 );
 
 describe('create resolver', () => {
-  let resolverActor: ResolverActor;
-  let controller: ICNSResolverController;
+  let registrarActor: RegistrarActor;
+  let controller: ICNSRegistrarController;
 
   beforeEach(() => {
-    resolverActor = mockResolverActor()
-    controller = new ICNSResolverController(resolverActor)
+    registrarActor = mockRegistrarActor();
+    controller = new ICNSRegistrarController(registrarActor)
   })
 
-  test('test domain get host', async () => {
-    const host = controller.getHost('xxxx.icp');
-    expect(host).toBeDefined();
+  test('test getMinPrice', async () => {
+    const price = controller.getMinPrice('xxxx.icp');
+    expect(price).toBeDefined();
   })
 
+  test('test instant registrar', async () => {
+    const tx = controller.instantRegister('xxxx.icp');
+    expect(tx).toBeDefined();
+  })
+
+  test('test renew price', async () => {
+    const price = controller.getRenewPrice('xxxx.icp');
+    expect(price).toBeDefined();
+  })
+
+  test('test renew', async () => {
+    const price = controller.renew('xxxx.icp', 1);
+    expect(price).toBeDefined();
+  })
 })

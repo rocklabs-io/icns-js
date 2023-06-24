@@ -1,5 +1,6 @@
 import { Types } from '@/declarations';
-import BigNumber from 'bignumber.js';
+import { BigNumber } from 'bignumber.js';
+
 // import {getCrc32} from '@dfinity/principal/lib/esm/utils/getCrc'
 
 const suffix = '.icp'

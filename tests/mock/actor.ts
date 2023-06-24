@@ -18,6 +18,7 @@ export const mockRegistrarActor = (params: Partial<ICNSRegistrar> = {}): Registr
   getAuctionByPrice: async () => [mocAuctionExt()],
   getBalance: async () => (BigInt(1)),
   getInfo: async () => mockRegistrarInfo(),
+  instantRegister: async () => ({ 'ok': BigInt(1) }),
   getMinBidPrice: async () => ({ 'ok': BigInt(1) }),
   getMinRaisePrice: async () => ({ 'ok': BigInt(1) }),
   getRandomAuctions: async () => [mocAuctionExt()],
