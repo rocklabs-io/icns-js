@@ -1,6 +1,6 @@
 {
   "name": "@rocklabs-io/icns-js",
-  "version": "0.1.13",
+  "version": "0.2.0",
   "description": "icns-js is a library for interacting with ICNS canisters",
   "main": "dist/index.js",
   "repository": "https://github.com/rocklabs-io/icns-js.git",
