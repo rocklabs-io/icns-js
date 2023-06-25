@@ -17,9 +17,11 @@
 - [BidExt](interfaces/BidExt.md)
 - [DefaultInfoExt](interfaces/DefaultInfoExt.md)
 - [ICNSETHVerify](interfaces/ICNSETHVerify.md)
+- [ICNSRegistrar](interfaces/ICNSRegistrar.md)
 - [Info](interfaces/Info.md)
 - [Metadata](interfaces/Metadata.md)
 - [RecordExt](interfaces/RecordExt.md)
+- [RegisterInfo](interfaces/RegisterInfo.md)
 - [ToBigNumberOptions](interfaces/ToBigNumberOptions.md)
 
 ### Classes
@@ -231,6 +233,3 @@ ___
 #### Returns
 
 `boolean`
-
-
-

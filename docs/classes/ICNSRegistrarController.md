@@ -11,9 +11,12 @@ This class is responsible for handling all the requests related to the ICNS regi
 - [claim](ICNSRegistrarController.md#claim)
 - [domainIsAvailable](ICNSRegistrarController.md#domainisavailable)
 - [getAuciton](ICNSRegistrarController.md#getauciton)
+- [getMinPrice](ICNSRegistrarController.md#getminprice)
 - [getRegistrarInfo](ICNSRegistrarController.md#getregistrarinfo)
+- [getRenewPrice](ICNSRegistrarController.md#getrenewprice)
 - [getUserBalance](ICNSRegistrarController.md#getuserbalance)
-- [placeBid](ICNSRegistrarController.md#placebid)
+- [instantRegister](ICNSRegistrarController.md#instantregister)
+- [nameExpiry](ICNSRegistrarController.md#nameexpiry)
 - [renew](ICNSRegistrarController.md#renew)
 - [withdraw](ICNSRegistrarController.md#withdraw)
 
@@ -73,7 +76,7 @@ ___
 
 ### domainIsAvailable
 
-▸ **domainIsAvailable**(`domain`): `Promise`<`string` \| `boolean`\>
+▸ **domainIsAvailable**(`domain`): `Promise`<`boolean`\>
 
 Verify domain available or not.
 
@@ -85,7 +88,7 @@ Verify domain available or not.
 
 #### Returns
 
-`Promise`<`string` \| `boolean`\>
+`Promise`<`boolean`\>
 
 ___
 
@@ -109,6 +112,26 @@ Return auction state.
 
 ___
 
+### getMinPrice
+
+▸ **getMinPrice**(`domain`): `Promise`<`bigint`\>
+
+Get minimum register price by domain.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `domain` | `string` | Domain name, 'hello' for example. |
+
+#### Returns
+
+`Promise`<`bigint`\>
+
+Register price.
+
+___
+
 ### getRegistrarInfo
 
 ▸ **getRegistrarInfo**(): `Promise`<[`Info`](../interfaces/Info.md)\>
@@ -118,6 +141,26 @@ Get the Common Info from registrar canister.
 #### Returns
 
 `Promise`<[`Info`](../interfaces/Info.md)\>
+
+___
+
+### getRenewPrice
+
+▸ **getRenewPrice**(`domain`): `Promise`<`bigint`\>
+
+Get minimum renew price by domain name.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `domain` | `string` | domain name to be renewed, 'hello' for example. |
+
+#### Returns
+
+`Promise`<`bigint`\>
+
+renew price.
 
 ___
 
@@ -141,25 +184,43 @@ Return balance.
 
 ___
 
-### placeBid
+### instantRegister
 
-▸ **placeBid**(`domain`, `amount`): `Promise`<`void`\>
+▸ **instantRegister**(`domain`): `Promise`<`bigint`\>
 
-Place Bid into canister.
-This function uses the actor agent identity.
+Register a name (sufficient WICP allowance is required).
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `domain` | `string` | - |
-| `amount` | `string` | the amount of this bid. |
+| `domain` | `string` | Domain name, 'hello' for example. |
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`<`bigint`\>
 
-Return void promise.
+TxReceipt.
+
+___
+
+### nameExpiry
+
+▸ **nameExpiry**(`domain`): `Promise`<`bigint`\>
+
+Get expiry time by domain name.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `domain` | `string` | Domain name, 'hello' for example. |
+
+#### Returns
+
+`Promise`<`bigint`\>
+
+Expiry time (nano seconds).
 
 ___
 
